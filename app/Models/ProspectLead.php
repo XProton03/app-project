@@ -18,6 +18,7 @@ class ProspectLead extends Model
     protected $table = 'prospect_leads';
     protected $fillable = [
         'company_name',
+        'category_industries_id',
         'industry_type',
         'phone',
         'email',
