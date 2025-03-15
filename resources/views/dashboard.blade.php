@@ -192,26 +192,7 @@
                             <h5><i class="ti ti-dots"></i> Category Industries</h5>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Category</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($categoryIndustries as $category)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $category->category }}</td>
-                                                <td>{{ $category->count }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                            @livewire('category-industries-table')
                         </div>
                     </div>
                 </div>

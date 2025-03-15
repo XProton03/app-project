@@ -38,6 +38,7 @@
     <!-- Load DataTables Setelah jQuery -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    @livewireStyles
 
     <style>
         body {
@@ -83,7 +84,8 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    <script defer src="https://unpkg.com/@alpinejs/morph@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- Required Js -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script> <!-- FullCalendar JS -->
@@ -95,6 +97,7 @@
     <script src="{{ asset('dist/assets/js/pcoded.js') }}"></script>
     <script src="{{ asset('dist/assets/js/plugins/feather.min.js') }}"></script>
     @yield('scripts')
+    @livewireScripts
 </body>
 <!-- [Body] end -->
 
