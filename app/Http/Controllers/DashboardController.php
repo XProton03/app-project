@@ -13,35 +13,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $prospectCount = $this->countProspects();
-        $schedules = \App\Models\ProspectLead::select('id', 'schedule', 'company_name', 'status_leads_id', 'followup_by')->get(); // Fetch schedule data with company_name
-
-        // Aggregate count of status_leads_id
-        $statusCounts = DB::table('prospect_leads')
-            ->select('status', DB::raw('count(*) as count'))
-            ->join('status_leads', 'prospect_leads.status_leads_id', '=', 'status_leads.id')
-            ->groupBy('status')
-            ->get();
-        $categoryIndustries = DB::table('prospect_leads')
-            ->select('category', DB::raw('count(*) as count'))
-            ->join('category_industries', 'prospect_leads.category_industries_id', '=', 'category_industries.id')
-            ->groupBy('category')
-            ->get();
-        $statusFailed = ProspectLead::where('status_leads_id', '10')->count();
-        $statusFollowup = ProspectLead::where('status_leads_id', '!=', 10)
-            ->where('status_leads_id', '!=', 1)
-            ->where('status_leads_id', '!=', 11)
-            ->count();
-        $statusPendingFollowup = ProspectLead::where('status_leads_id', 1)
-            ->count();
-        $statusClosed = ProspectLead::where('status_leads_id', 11)
-            ->count();
-        $statusLeads = StatusLead::leftJoin('prospect_leads', 'status_leads.id', '=', 'prospect_leads.status_leads_id')
-            ->select('status_leads.status', DB::raw('COUNT(prospect_leads.id) as total'))
-            ->groupBy('status_leads.status')
-            ->get();
-
-        return view('dashboard', compact('prospectCount', 'schedules', 'statusCounts', 'statusLeads', 'statusFailed', 'statusFollowup', 'statusPendingFollowup', 'categoryIndustries', 'statusClosed')); // Pass statusCounts to view
+        return view('dashboard'); // Pass statusCounts to view
     }
 
     public function getSchedules()
