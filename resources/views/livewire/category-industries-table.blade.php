@@ -1,6 +1,5 @@
 <div wire:poll.5s>
-    <div class="row">
-        <div class="col-md-12 col-xl-6">
+    {{-- <div class="col-md-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h5><i class="ti ti-table"></i> Status Leads</h5>
@@ -79,40 +78,39 @@
                             }
                         });
                     });
-                </script> --}}
+                </script>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12 col-xl-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5><i class="ti ti-dots"></i> Category Industries</h5>
-                </div>
-                <div class="card-body">
-                    {{-- <button wire:click="loadData">Refresh Data</button> --}}
-                    <table class="table table-sm">
-                        <thead>
+        </div> --}}
+    <div class="col-md-12 col-xl-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="ti ti-dots"></i> Category Industries</h5>
+            </div>
+            <div class="card-body">
+                {{-- <button wire:click="loadData">Refresh Data</button> --}}
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Category</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($categoryIndustries as $index => $category)
                             <tr>
-                                <th>#</th>
-                                <th>Category</th>
-                                <th>Total</th>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $category->category }}</td>
+                                <td>{{ $category->count }}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($categoryIndustries as $index => $category)
-                                <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $category->category }}</td>
-                                    <td>{{ $category->count }}</td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3">No data available</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
+                        @empty
+                            <tr>
+                                <td colspan="3">No data available</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

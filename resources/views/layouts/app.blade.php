@@ -86,7 +86,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Required Js -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script> <!-- FullCalendar JS -->
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script src="{{ asset('dist/assets/js/plugins/popper.min.js') }}"></script>
     <script src="{{ asset('dist/assets/js/plugins/simplebar.min.js') }}"></script>
     <script src="{{ asset('dist/assets/js/plugins/bootstrap.min.js') }}"></script>

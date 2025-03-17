@@ -23,8 +23,8 @@
             <div class="row">
                 @livewire('dashboard')
             </div>
+            @livewire('charts.status-leads-chart')
             <div class="row">
-                @livewire('category-industries-table')
                 <div class="col-md-12 col-xl-6">
                     <div class="card">
                         <div class="card-header">

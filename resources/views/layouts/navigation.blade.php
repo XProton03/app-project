@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
         <div class="m-header">
             {{-- <img src="{{ asset('dist/assets/images/icon.png') }}" class="img-fluid" alt="logo"> --}}
-            <h4>CV DEA GROUP</h4>
+            <h4>DEA GROUP</h4>
         </div>
         <div class="navbar-content">
             <ul class="pc-navbar">
