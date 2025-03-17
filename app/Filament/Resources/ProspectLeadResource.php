@@ -227,6 +227,7 @@ class ProspectLeadResource extends Resource
                         ->action(function (Table $table, ProspectLead $record, array $data) {
                             $record->update([
                                 'status_leads_id'       => $data['status_leads_id'],
+                                'user_id'               => auth::user()->id,
                                 'is_followup_needed'    => false,
                                 'notes'                 => $data['notes'],
                             ]);
@@ -327,7 +328,6 @@ class ProspectLeadResource extends Resource
                             $records->each(function ($record) use ($data) {
                                 $record->update([
                                     'category_industries_id' => $data['category_industries_id'],
-                                    'user_id' => auth::user()->id, // Update kolom note dari form modal
                                 ]);
                             });
                         })
