@@ -66,6 +66,6 @@ class User extends Authenticatable implements FilamentUser
     }
     public function prospect_leads()
     {
-        return $this->hasMany(ProspectLead::class);
+        return $this->hasMany(ProspectLead::class, 'user_id');
     }
 }

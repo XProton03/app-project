@@ -20,13 +20,15 @@ class FollowupProspectTable extends BaseWidget
                     ->where('prospect_leads.is_followup_needed', true)
                     ->selectRaw('users.name, prospect_leads.user_id AS id, COUNT(prospect_leads.id) as total_followup_needed')
                     ->groupBy('prospect_leads.user_id', 'users.name')
+                    ->orderByRaw('COUNT(prospect_leads.id) DESC') // Urutkan berdasarkan jumlah follow-up
             )
             ->columns([
                 TextColumn::make('name')
-                    ->label('Followup By')
-                    ->sortable(),
+                    ->label('User')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('total_followup_needed')
-                    ->label('Need Followup')
+                    ->label('Total Follow-up Needed')
                     ->sortable()
                     ->formatStateUsing(fn($state) => number_format($state)),
             ]);
