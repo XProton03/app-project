@@ -187,7 +187,10 @@ class ProspectLeadResource extends Resource
                     ->preload(),
                 SelectFilter::make('is_followup_needed')
                     ->label('Need Followup')
-                    ->options(fn(): array => ProspectLead::pluck('is_followup_needed')->unique()->mapWithKeys(fn($value) => [$value => strval($value)])->toArray())
+                    ->options([
+                        '1' => 'Yes',
+                        '0' => 'No',
+                    ])
                     ->searchable()
                     ->preload(),
             ])
