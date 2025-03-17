@@ -24,11 +24,10 @@ class FollowupProspectTable extends BaseWidget
             )
             ->columns([
                 TextColumn::make('name')
-                    ->label('User')
-                    ->sortable()
-                    ->searchable(),
+                    ->label('Followup By')
+                    ->sortable(),
                 TextColumn::make('total_followup_needed')
-                    ->label('Total Follow-up Needed')
+                    ->label('Need Followup')
                     ->sortable()
                     ->formatStateUsing(fn($state) => number_format($state)),
             ]);
