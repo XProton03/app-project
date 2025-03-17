@@ -227,7 +227,6 @@ class ProspectLeadResource extends Resource
                         ->action(function (Table $table, ProspectLead $record, array $data) {
                             $record->update([
                                 'status_leads_id'       => $data['status_leads_id'],
-                                'user_id'               => auth::user()->id,
                                 'is_followup_needed'    => false,
                                 'notes'                 => $data['notes'],
                             ]);
