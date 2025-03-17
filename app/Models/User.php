@@ -64,4 +64,8 @@ class User extends Authenticatable implements FilamentUser
             ->logOnlyDirty()
             ->logExcept(['password']);
     }
+    public function prospect_leads()
+    {
+        return $this->hasMany(ProspectLead::class);
+    }
 }

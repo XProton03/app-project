@@ -9,7 +9,7 @@ class Kernel extends ConsoleKernel
 {
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('followup:check')->hourly(); // Bisa diganti daily()
+        $schedule->command('followup:check')->daily(); // Bisa diganti daily()
     }
     protected function commands()
     {

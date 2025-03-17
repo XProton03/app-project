@@ -31,6 +31,7 @@ class ListProspectLeads extends ListRecords
         return [
             ProspectLeadResource\Widgets\ProspectLeadOverview::class,
             ProspectLeadResource\Widgets\ProspectSchedule::class,
+            ProspectLeadResource\Widgets\FollowupProspectTable::class,
         ];
     }
     public function getTabs(): array
