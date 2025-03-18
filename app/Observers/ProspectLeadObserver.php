@@ -27,7 +27,7 @@ class ProspectLeadObserver
         }
 
         // Cek apakah sudah 2 hari sejak terakhir di-update
-        $needsFollowUp = $prospectLead->updated_at->diffInDays(Carbon::now()) >= 2;
+        $needsFollowUp = $prospectLead->last_followup->diffInDays(Carbon::now()) >= 3;
 
         // Update status follow-up
         $prospectLead->updateQuietly(['is_followup_needed' => $needsFollowUp]);

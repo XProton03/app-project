@@ -30,6 +30,7 @@ class ProspectLead extends Model
         'user_id',
         'followup_by',
         'is_followup_needed',
+        'last_followup',
         'notes',
     ];
 

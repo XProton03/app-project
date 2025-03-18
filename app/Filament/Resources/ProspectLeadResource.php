@@ -139,6 +139,9 @@ class ProspectLeadResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')
                     ->since()
                     ->searchable(),
+                Tables\Columns\TextColumn::make('last_followup')
+                    ->date()
+                    ->searchable(),
                 IconColumn::make('is_followup_needed')
                     ->label('Need Followup')
                     ->boolean()
@@ -202,7 +205,7 @@ class ProspectLeadResource extends Resource
                         ->label('Followup Done')
                         ->icon('heroicon-o-check')
                         ->color('success')
-                        ->visible(fn($record) => $record->is_followup_needed)
+                        ->visible(fn($record) => !in_array($record->status_leads_id, [10, 11]))
                         ->form([
                             Forms\Components\Select::make('status_leads_id')
                                 ->label('State')
@@ -229,6 +232,7 @@ class ProspectLeadResource extends Resource
                                 'status_leads_id'       => $data['status_leads_id'],
                                 'user_id'               => auth::user()->id,
                                 'is_followup_needed'    => false,
+                                'last_followup'         => now(),
                                 'notes'                 => $data['notes'],
                             ]);
                             Notification::make()

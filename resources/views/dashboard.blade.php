@@ -49,7 +49,7 @@
                                     // Fetch latest schedule data
                                     fetch('/api/schedules')
                                         .then(response => {
-                                            console.log("Response status:", response.status); // Log response status
+                                            // console.log("Response status:", response.status); // Log response status
                                             return response.json();
                                         })
                                         .then(data => {
