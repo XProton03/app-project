@@ -30,7 +30,7 @@ class UpdateFollowUpProspectCommand extends Command
         // Update is_followup_needed menjadi true jika updated_at lebih dari 2 hari
         DB::table('prospect_leads')
             ->whereNotIn('status_leads_id', [10, 11, 1]) // Kecuali status tertentu
-            ->where('last_followup', '>=', Carbon::now()->subDays(2))
+            ->where('last_followup', '<=', Carbon::now()->subDays(2))
             ->where('is_followup_needed', false) // Hanya update jika masih false
             ->update(['is_followup_needed' => true]);
 

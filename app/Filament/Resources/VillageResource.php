@@ -56,7 +56,6 @@ class VillageResource extends Resource implements HasShieldPermissions
                             ->preload()
                             ->required(),
                         Forms\Components\TextInput::make('name')
-                            ->unique(ignoreRecord: true)
                             ->required()
                             ->maxLength(255),
                     ])

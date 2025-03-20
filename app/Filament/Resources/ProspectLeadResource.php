@@ -136,17 +136,21 @@ class ProspectLeadResource extends Resource
             ])
             ->defaultSort('updated_at', 'desc')
             ->columns([
+                IconColumn::make('is_followup_needed')
+                    ->label('#')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-flag')
+                    ->falseIcon('heroicon-o-check-circle')
+                    ->colors([
+                        'danger' => fn($state) => $state,  // Warna merah jika true
+                        'success' => fn($state) => !$state, // Warna hijau jika false
+                    ]),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->since()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('last_followup')
-                    ->date()
+                    ->since()
                     ->searchable(),
-                IconColumn::make('is_followup_needed')
-                    ->label('Need Followup')
-                    ->boolean()
-                    ->trueIcon('heroicon-o-flag')
-                    ->falseIcon('heroicon-o-check-circle'),
                 Tables\Columns\TextColumn::make('company_name')
                     ->label('Company')
                     ->formatStateUsing(fn($state) => strtoupper($state))
@@ -168,9 +172,6 @@ class ProspectLeadResource extends Resource
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Followup by')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('schedule')
-                    ->searchable()
-                    ->date(),
             ])
             ->filters([
                 SelectFilter::make('user_id')
@@ -202,9 +203,9 @@ class ProspectLeadResource extends Resource
                     Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Action::make('followupDone')
-                        ->label('Followup Done')
-                        ->icon('heroicon-o-check')
-                        ->color('success')
+                        ->label('Followup')
+                        ->icon('heroicon-o-cog-6-tooth')
+                        ->color('warning')
                         ->visible(fn($record) => !in_array($record->status_leads_id, [10, 11]))
                         ->form([
                             Forms\Components\Select::make('status_leads_id')
