@@ -14,6 +14,13 @@
                     </a>
                 </li>
                 <li class="pc-item">
+                    <a href="{{ route('prospect') }}"
+                        class="{{ request()->routeIs('prospect') ? 'active' : '' }} pc-link">
+                        <span class="pc-micon"><i class="ti ti-database"></i></span>
+                        <span class="pc-mtext">Data Prospect</span>
+                    </a>
+                </li>
+                <li class="pc-item">
                     <a href="{{ route('activities') }}"
                         class="{{ request()->routeIs('activities') ? 'active' : '' }} pc-link">
                         <span class="pc-micon"><i class="ti ti-history"></i></span>

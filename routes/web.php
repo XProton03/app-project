@@ -11,3 +11,5 @@ Route::get('/api/prospect-leads', [DashboardController::class, 'getProspectLeads
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/api/schedules', [DashboardController::class, 'getSchedules']); // New route for fetching schedules
 Route::get('/activities', [DashboardController::class, 'getActivities'])->name('activities');
+Route::get('/prospect', [DashboardController::class, 'getProspect'])->name('prospect');
+Route::get('/api/prospect-data', [DashboardController::class, 'getDataProspect']);

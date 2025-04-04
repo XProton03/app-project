@@ -60,4 +60,36 @@ class DashboardController extends Controller
             ->addColumn('notes', fn($lead) => strip_tags($lead->notes))
             ->make(true);
     }
+
+    public function getProspect()
+    {
+        return view('prospect');
+    }
+    public function getDataProspect(Request $request)
+    {
+        $query = ProspectLead::with(['user', 'status_leads']);
+
+        return DataTables::of($query)
+            ->addColumn('updated_at_formatted', function ($lead) {
+                return $lead->updated_at ? $lead->updated_at->format('Y-m-d') : '';
+            })
+            ->editColumn('last_followup', function ($lead) {
+                return $lead->last_followup ? $lead->last_followup->format('Y-m-d') : '-';
+            })
+            ->addColumn('user_name', function ($lead) {
+                return $lead->user->name ?? '-';
+            })
+            ->addColumn('status_name', function ($lead) {
+                return $lead->status_leads->status ?? '-';
+            })
+            ->addColumn('notes', function ($lead) {
+                return strip_tags($lead->notes);
+            })
+            ->orderColumn('updated_at', 'updated_at $1') // Memastikan sorting berdasarkan nilai asli
+            ->filterColumn('updated_at', function ($query, $keyword) {
+                $query->whereRaw("DATE(updated_at) LIKE ?", ["%{$keyword}%"]);
+            })
+            ->rawColumns(['updated_at_formatted']) // Pastikan HTML dalam kolom ini diproses
+            ->make(true);
+    }
 }
