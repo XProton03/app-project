@@ -31,6 +31,7 @@ use Filament\Forms\Set;
 use Filament\Infolists\Infolist;
 use App\Filament\Exports\EmployeeExporter;
 use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Actions\CreateAction;
 
 class EmployeeResource extends Resource implements HasShieldPermissions
 {
@@ -43,10 +44,6 @@ class EmployeeResource extends Resource implements HasShieldPermissions
     protected static ?string $slug = 'employee';
     protected static ?int $navigationSort = 21;
 
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
 
     public static function getPermissionPrefixes(): array
     {
@@ -210,9 +207,9 @@ class EmployeeResource extends Resource implements HasShieldPermissions
     {
         return $table
             ->headerActions([
-                ExportAction::make()
-                    ->exporter(EmployeeExporter::class)
+                //
             ])
+            ->striped()
             ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('created_at')

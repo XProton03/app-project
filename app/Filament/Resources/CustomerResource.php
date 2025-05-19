@@ -13,11 +13,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\ActionGroup;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ActionGroup;
 
 class CustomerResource extends Resource implements HasShieldPermissions
 {
@@ -25,10 +25,6 @@ class CustomerResource extends Resource implements HasShieldPermissions
 
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
     protected static ?string $navigationGroup = 'Customers';
-    protected static ?string $navigationLabel = 'Customers';
-    protected static ?string $label = 'Customer';
-    protected static ?string $slug = 'customers';
-    protected static ?int $navigationSort = 31;
 
     public static function getPermissionPrefixes(): array
     {
@@ -109,7 +105,6 @@ class CustomerResource extends Resource implements HasShieldPermissions
                     ->searchable(),
             ])
             ->filters([
-                //
             ])
             ->actions([
                 ActionGroup::make([
@@ -129,23 +124,18 @@ class CustomerResource extends Resource implements HasShieldPermissions
                 ]),
             ]);
     }
+
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
             ->schema([
-                Section::make('Detail Customer')
+                Section::make('Detail Karyawan')
                     ->schema([
                         TextEntry::make('name')
-                            ->icon('heroicon-o-user-circle')
-                            ->iconColor('primary')
                             ->label('Nama'),
                         TextEntry::make('phone')
-                            ->icon('heroicon-o-device-phone-mobile')
-                            ->iconColor('primary')
                             ->label('No. Telepon'),
                         TextEntry::make('email')
-                            ->icon('heroicon-o-envelope')
-                            ->iconColor('primary')
                             ->label('Email'),
                         TextEntry::make('customer_type')
                             ->label('Tipe')
@@ -156,8 +146,6 @@ class CustomerResource extends Resource implements HasShieldPermissions
                             ->badge()
                             ->label('Perusahaan'),
                         TextEntry::make('companies.company_address')
-                            ->icon('heroicon-o-map-pin')
-                            ->iconColor('primary')
                             ->label('Alamat')
                             ->markdown()
                             ->columnSpanFull()
@@ -177,8 +165,8 @@ class CustomerResource extends Resource implements HasShieldPermissions
     {
         return [
             'index' => Pages\ListCustomers::route('/'),
-            'view' => Pages\ViewCustomer::route('/{record}'),
             'create' => Pages\CreateCustomer::route('/create'),
+            'view' => Pages\ViewCustomer::route('/{record}'),
             'edit' => Pages\EditCustomer::route('/{record}/edit'),
             'activities' => Pages\ListCustomerActivities::route('/{record}/activities'),
         ];

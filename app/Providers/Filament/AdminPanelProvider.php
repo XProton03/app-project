@@ -20,6 +20,7 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Rmsramos\Activitylog\ActivitylogPlugin;
+use Filament\Support\Enums\MaxWidth;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -30,11 +31,15 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->spa()
+            ->unsavedChangesAlerts()
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->databaseNotifications()
             ->sidebarCollapsibleOnDesktop()
             ->font('Poppins')
             ->favicon(asset('img/icon.png'))
             ->brandName('DEA GROUP')
+            ->maxContentWidth(MaxWidth::Full)
             ->colors([
                 'danger'    => Color::Rose,
                 'gray'      => Color::Gray,

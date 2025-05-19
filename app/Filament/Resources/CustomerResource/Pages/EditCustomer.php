@@ -13,7 +13,14 @@ class EditCustomer extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\ViewAction::make()
+                ->icon('heroicon-o-eye')
+                ->label('View Customer')
+                ->color('info'),
+            Actions\DeleteAction::make()
+            ->icon('heroicon-o-trash')
+            ->label('Delete Customer')
+            ->color('danger'),
         ];
     }
 }

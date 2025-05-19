@@ -20,6 +20,8 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use App\Filament\Exports\CompanyExporter;
 use Filament\Tables\Actions\ExportBulkAction;
+use Filament\Forms\Get as FormsGet;
+use Filament\Forms\Set;
 
 class CompanyResource extends Resource implements HasShieldPermissions
 {
@@ -51,11 +53,47 @@ class CompanyResource extends Resource implements HasShieldPermissions
                 Forms\Components\Section::make('Form Company')
                     ->description('please fill the column')
                     ->schema([
-                        Forms\Components\Select::make('villages_id')
-                            ->label('Village')
-                            ->relationship('villages', 'name')
+                        Forms\Components\Select::make('provinces_id')
+                            ->label('Province')
+                            ->relationship(name: 'provinces', titleAttribute: 'name')
+                            ->searchable()
+                            ->preload()
                             ->required()
-                            ->searchable(),
+                            ->live()
+                            ->afterStateUpdated(function (Set $set) {
+                                $set('regencies_id', null);
+                                $set('districts_id', null);
+                            }),
+                        Forms\Components\Select::make('regencies_id')
+                            ->label('Regency')
+                            ->options(function (FormsGet $get) {
+                                return \App\Models\Regency::where('provinces_id', $get('provinces_id'))->pluck('name', 'id');
+                            })
+                            ->searchable()
+                            ->preload()
+                            ->required()
+                            ->live()
+                            ->afterStateUpdated(function (Set $set) {
+                                $set('districts_id', null);
+                            }),
+                        Forms\Components\Select::make('districts_id')
+                            ->label('District')
+                            ->options(function (FormsGet $get) {
+                                return \App\Models\District::where('regencies_id', $get('regencies_id'))->pluck('name', 'id');
+                            })
+                            ->searchable()
+                            ->preload()
+                            ->required()
+                            ->live(),
+                        Forms\Components\Select::make('villages_id')
+                            ->label('Villages')
+                            ->options(function (FormsGet $get) {
+                                return \App\Models\Village::where('districts_id', $get('districts_id'))->pluck('name', 'id');
+                            })
+                            ->searchable()
+                            ->preload()
+                            ->required()
+                            ->live(),
                         Forms\Components\TextInput::make('company_name')
                             ->required()
                             ->maxLength(255),
@@ -70,11 +108,11 @@ class CompanyResource extends Resource implements HasShieldPermissions
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('villages.districts.regencies.provinces.name')
+                Tables\Columns\TextColumn::make('provinces.name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('villages.districts.regencies.name')
+                Tables\Columns\TextColumn::make('regencies.name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('villages.districts.name')
+                Tables\Columns\TextColumn::make('districts.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('villages.name')
                     ->searchable(),
@@ -111,9 +149,18 @@ class CompanyResource extends Resource implements HasShieldPermissions
             ->schema([
                 Section::make('Detail Company')
                     ->schema([
-                        TextEntry::make('villages.name')
+                        TextEntry::make('provinces.name')
+                            ->badge('primary')
+                            ->label('Pronvinsi'),
+                        TextEntry::make('regencies.name')
+                            ->badge('primary')
+                            ->label('Kabupaten'),
+                        TextEntry::make('districts.name')
                             ->badge('primary')
                             ->label('Kecamatan'),
+                        TextEntry::make('villages.name')
+                            ->badge('primary')
+                            ->label('Desa'),
                         TextEntry::make('company_name')
                             ->badge('primary')
                             ->label('Perusahaan'),

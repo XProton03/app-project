@@ -60,12 +60,19 @@ return [
             'report' => false,
         ],
 
-        'nas' => [
+        'nas1' => [
             'driver' => 'local',
             'root' => storage_path('app/public/uploads'),
             'url' => env('APP_URL') . '/storage/uploads',
             'visibility' => 'public',
             'throw' => true,
+        ],
+
+        'nas' => [
+            'driver' => 'local',
+            'root' => '\\\\192.168.20.244\\web\\files', // Path NAS jakarta
+            'url' => 'http://192.168.20.244/files/',
+            'visibility' => 'public',
         ],
 
     ],

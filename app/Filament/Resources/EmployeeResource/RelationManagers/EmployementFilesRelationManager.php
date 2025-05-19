@@ -67,7 +67,9 @@ class EmployementFilesRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                ->icon('heroicon-o-plus-circle')
+                ->label('Add File'),
             ])
             ->actions([
                 ActionGroup::make([
